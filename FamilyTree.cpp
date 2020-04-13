@@ -57,6 +57,8 @@ family::Tree& family::Tree::addMother(string son, string mother){
 }
 
 string family::Tree::relation_help(string name,string prefix) {
+
+
        if (!this){
            return "0";
        }
@@ -83,18 +85,24 @@ string family::Tree::relation_help(string name,string prefix) {
 }
 
 string family::Tree::relation(string name){
+
+
        if (this->root==name){
            return "me";
        }
-       if(this->mother->root==name){
-           return "mother";
+       if(this->mother) {
+           if (this->mother->root == name) {
+               return "mother";
+           }
        }
-       if(this->father->root==name){
-           return "father";
+       if(this->father) {
+           if (this->father->root == name) {
+               return "father";
+           }
        }
-       else {
+
            string a = this->father->relation_help(name, "grand");
-           string b = this->father->relation_help(name, "grand");
+           string b = this->mother->relation_help(name, "grand");
            if(a!="0"){
                return a;
            }
@@ -102,9 +110,9 @@ string family::Tree::relation(string name){
                return b;
 
            }
-       }
 
-return "unrelated";
+
+       return "unrelated";
 }
 
 string family::Tree::find_help(string name,string prefix,int count) {
@@ -167,7 +175,6 @@ string family::Tree::find(string name){
       }
       string a="0";
       a=this->find_help(name,"",0);
-      //cout<<"a afer function"<<a<<endl;
       if(a!="0"){
           return a;
       }
