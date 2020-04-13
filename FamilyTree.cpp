@@ -8,7 +8,8 @@
 
 family::Tree& family::Tree:: search(string son) {
 
-    if(this) {
+    Tree *temp=this;
+    if(temp) {
         if (this->root == son) {
           //  cout << "yes i found" << this->root << endl;
             return *this;
@@ -16,7 +17,6 @@ family::Tree& family::Tree:: search(string son) {
         else {
 
                 Tree &ans1=this->father->search(son);
-                //cout << ans1.root<< endl;
 
                 //cout << "search in mother" << endl;
                 Tree &ans2=this->mother->search(son);
@@ -58,8 +58,8 @@ family::Tree& family::Tree::addMother(string son, string mother){
 
 string family::Tree::relation_help(string name,string prefix) {
 
-
-       if (!this){
+      Tree *temp=this;
+       if (!temp){
            return "0";
        }
        if(this->mother)
@@ -184,7 +184,8 @@ string family::Tree::find(string name){
 }
 void family::Tree::erase() {
 
-    if (this) {
+    Tree *temp=this;
+    if (temp) {
         //cout << "in erase" << endl;
          if(this->father) {
              //cout << "there is a father" << endl;
@@ -206,7 +207,8 @@ void family::Tree::erase() {
 
 
 void family::Tree::remove_help(string name){
-    if(this) {
+    Tree *temp=this;
+    if(temp) {
         if (name == this->root) {
             //cout<<"in removehelp"<<endl;
             if(this->father) {
@@ -252,7 +254,8 @@ int family::Tree::display_help() {
 
     int a=0;
     int b=0;
-    if(this) {
+    Tree *temp=this;
+    if(temp) {
         if (this->root!= "0") {
             if (this->father) {
                 a = this->father->display_help();
@@ -281,7 +284,8 @@ int family::Tree::display_help() {
 void family::Tree::display() {
 
     int c=0;
-    if(this)
+    Tree *temp=this;
+    if(temp)
      c=this->display_help();
     if(c==1)
     cout<<this->root<<endl;
