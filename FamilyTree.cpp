@@ -41,6 +41,11 @@ family::Tree& family::Tree:: search(string son) {
 
 family::Tree& family::Tree::addFather(string son, string father){
       Tree &temp=this->search(son);
+    //today 19/4
+    if(temp.father!=NULL){
+        throw exception();
+    }
+    //today 19/4
      // cout<<"cameback the one im going to add a father is: "<<temp.root<<endl;
       Tree *a=new Tree(father);
       temp.father=a;
@@ -50,7 +55,12 @@ family::Tree& family::Tree::addFather(string son, string father){
 }
 family::Tree& family::Tree::addMother(string son, string mother){
     Tree &temp=this->search(son);
-   // cout<<"cameback the one im going to add a mother is: "<<temp.root<<endl;
+    //today 19/4
+    if(temp.mother!=NULL){
+        throw exception();
+    }
+    //today 19/4
+
     Tree *a=new Tree(mother);
     temp.mother=a;
     return *this;
@@ -204,7 +214,7 @@ void family::Tree::erase() {
 
 }
 
-
+static int i=0;
 
 void family::Tree::remove_help(string name){
     Tree *temp=this;
@@ -214,10 +224,12 @@ void family::Tree::remove_help(string name){
             if(this->father) {
               //  cout<<"sending to erase ther ia a father"<<endl;
                 this->father->erase();
+                i=1;
             }
             if(this->mother) {
                // cout<<"sending to erase ther ia a mother"<<endl;
                 this->mother->erase();
+                i=1;
 
             }
            // cout<<"after erase"<<this->root<<endl;
@@ -244,9 +256,15 @@ family::Tree& family::Tree::remove(string name){
     if(this->root==name){
         throw exception();
     }
+    if(name==" "){
+        throw exception();
+    }
     Tree& save=*this;
     this->remove_help(name);
    // cout<<"done"<<endl;
+   if(i==0){
+       throw exception();
+   }
     return save;
 }
 
